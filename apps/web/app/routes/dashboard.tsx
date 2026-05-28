@@ -72,9 +72,14 @@ export default function DashboardRoute() {
           </Link>
         </div>
 
-        <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          <strong>Fase 2 activa.</strong> Auth real + CRUD UI completo. Próximas: Cloud Sources reales (Fase 3),
-          terminal SSH (Fase 4), logs streaming (Fase 5), playbooks (Fase 6), wizard provisioning (Fase 7).
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
+          <strong>MVP completo (Fases 1–7).</strong> Cloud Sources con cifrado libsodium ·{" "}
+          Terminal SSH web · Logs streaming + buffer 24 h ·{" "}
+          Playbooks editables · Wizard de provisioning end-to-end.{" "}
+          Ver{" "}
+          <Link to="/settings/cloud-sources" className="underline">Cloud Sources</Link>,{" "}
+          <Link to="/servers/nuevo" className="underline">Wizard</Link>,{" "}
+          <Link to="/playbooks" className="underline">Playbooks</Link>.
         </div>
       </div>
     </div>
