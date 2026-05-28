@@ -1,0 +1,41 @@
+node_modules/
+dist/
+build/
+.cache/
+.tmp/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# env (NUNCA commitear)
+.env
+.env.*.local
+
+# Datos persistentes locales
+data/
+*.sqlite
+*.sqlite3
+
+# Editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Claude / planning local
+.claude/
+plans/
+
+# Outputs build
+apps/api/lib/
+apps/web/.cache/
+apps/web/build/
+apps/web/public/build/
+packages/*/dist/
+
+# Llaves SSH generadas por la app
+data/ssh-keys/

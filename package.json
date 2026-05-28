@@ -1,0 +1,29 @@
+{
+  "name": "inframonitor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plataforma web personal de monitoreo y gestión de infraestructura multi-cloud (AWS, DigitalOcean, Azure)",
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm run build:packages && pnpm run dev:db && sleep 3 && pnpm run dev:init && (pnpm --filter @inframonitor/api dev) & (pnpm --filter @inframonitor/web dev)",
+    "build:packages": "pnpm --filter @inframonitor/shared-types build && pnpm --filter @inframonitor/database build",
+    "build:db": "pnpm --filter @inframonitor/database build",
+    "build:types": "pnpm --filter @inframonitor/shared-types build",
+    "dev:db": "docker compose -f docker-compose.dev.yml up -d",
+    "dev:init": "pnpm --filter @inframonitor/api run init-db || true",
+    "dev:api": "pnpm --filter @inframonitor/api dev",
+    "dev:web": "pnpm --filter @inframonitor/web dev",
+    "stop": "pnpm stop:local && pnpm stop:db",
+    "stop:local": "set -a; source .env 2>/dev/null; set +a; lsof -ti :${INFRA_API_PORT:-8301},:${INFRA_WEB_PORT:-5274} | xargs kill -9 2>/dev/null || true",
+    "stop:db": "docker compose -f docker-compose.dev.yml down",
+    "status": "echo '📦 Contenedores:' && docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}' && echo '\\n🟢 Procesos Node (dev):' && (ps aux | grep -E 'node.*(dev|main\\.ts)' | grep -v grep || echo '  ninguno')",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
